@@ -1,0 +1,28 @@
+################
+# QA Additions
+################
+
+node_modules
+dist
+.tmp
+.DS_Store
+bower_components
+npm-debug.log
+*.pyc
+*__pycache__*
+geckodriver.log
+jmeter.log
+log.txt
+
+## Ignnore VirtualEnv Installs
+env/
+
+## secrets has it's own .gitignore
+
+# Test Outputs
+utilities/allure/allure_results/history/*
+utilities/allure/allure-reports/*
+utilities/allure/allure_results/*
+################
+# End QA Additions
+################

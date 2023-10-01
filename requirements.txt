@@ -1,0 +1,6 @@
+git+https://github.com/behave/behave#1.2.7.dev5
+python-dotenv==0.9.1
+requests==2.31.0
+beautifulsoup4==4.8.0
+allure-behave==2.8.10
+pylint==2.17.7
