@@ -30,3 +30,11 @@ Feature: An example of API Tests /pet/findPetsByStatus
     Given I "GET" "/pet/findByStatus?status=available" with requests
     Then it should have a "200" status code
       And the response should use https
+
+  @requests @trivial
+  Scenario: Correct error when parameter is left off
+    Given I "GET" "/pet/findByStatus?status=" with requests
+    Then it should have a "400" status code
+      And the response message should include "Input error: query parameter"
+      And the response message should include "allowable values `[available, pending, sold]`"
+

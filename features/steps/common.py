@@ -31,9 +31,19 @@ def get(context, method, uri, parameters):
 @step('it should have a "{code:d}" status code')
 def step_impl(context, code):
     assert context.response.status_code == code, \
-    'Did not get {expected} status code on response, instead {resullt}'.format(
+    'Did not get {expected} status code on response, instead {result}'.format(
         expected = code,
-        resullt = context.response.status_code
+        result = context.response.status_code
+    )
+
+
+@step('the response message should include "{string}"')
+def step_impl(context, string):
+    data = context.response.json()
+    assert string in data['message'] , \
+    'Did not get {string} to be in message, instead got {result}'.format(
+        expected = string,
+        result = data['message']
     )
 
 
