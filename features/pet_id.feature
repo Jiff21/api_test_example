@@ -32,3 +32,11 @@ Feature: An example of API Tests /pet/{pet_id}
   Scenario: GET Pet by ID 404s when ID does not exist
     Given I "GET" "/pet/10000000000" with requests
     Then it should have a "404" status code
+
+  @requests @Blocker
+  Scenario: POST Pet by ID allows me to create a pet
+    Given I POST "/pet" to create a "Dog" named "Spot" with an ID of "1001"
+    Then it should have a "200" status code
+      And the response data should include "id" number "1001"
+      And the response data should include "name" of "Spot"
+      And the response data should include "status" of "available"

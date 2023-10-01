@@ -19,7 +19,7 @@ def get(context, method, uri):
 
 
 @step('I "{method}" "{uri}" with the parameters "{parameters}"')
-def get(context, method, uri, parameters):
+def step_impl(context, method, uri, parameters):
     context.current_url = API_URL + uri + parameters
     if method == "GET":
         log.debug('Getting this url with requests %s', context.current_url)
@@ -48,9 +48,27 @@ def step_impl(context, message):
 
 
 @then('the response should use https')
-def get(context):
+def step_impl(context):
     regex = re.compile('^https:')
     assert regex.match(context.response.url), \
     'Expected the response to be on https, but got {url}'.format(
         url = context.response.url
+    )
+
+@step('the response data should include "{key}" of "{value}"')
+def step_impl(context, key, value):
+    data = context.response.json()
+    assert value == data[key], \
+    'Expected {expected} to be in response, instead got {result}'.format(
+        expected = value,
+        result = data[key]
+    )
+
+@step('the response data should include "{key}" number "{value:d}"')
+def step_impl(context, key, value):
+    data = context.response.json()
+    assert value == data[key], \
+    'Expected {expected} to be in response, instead got {result}'.format(
+        expected = value,
+        result = data[key]
     )
