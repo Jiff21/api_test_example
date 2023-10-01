@@ -37,12 +37,12 @@ def step_impl(context, code):
     )
 
 
-@step('the response message should include "{string}"')
-def step_impl(context, string):
+@step('the response message should include "{message}"')
+def step_impl(context, message):
     data = context.response.json()
-    assert string in data['message'] , \
-    'Did not get {string} to be in message, instead got {result}'.format(
-        expected = string,
+    assert message in data['message'] , \
+    'Expected {expected} to be in message, instead got {result}'.format(
+        expected = message,
         result = data['message']
     )
 
