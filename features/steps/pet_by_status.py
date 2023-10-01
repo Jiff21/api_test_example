@@ -1,4 +1,4 @@
-''' Step definition for check_once.feature'''
+''' Step definition for pet_by_status.feature'''
 # pylint: disable=consider-using-f-string
 import re
 import json
@@ -63,24 +63,3 @@ def get(context):
 def get(context):
     data = context.response.json()
     assert not any('dob' in dog for dog in data), 'Data should not include a dogs Personal Identifiable Information'
-
-
-
-@then('this dog is named "{name}"')
-def get(context, name):
-    data = context.response.json()
-    import pdb; pdb.set_trace
-    assert data['name'] == name, 'Expected dog named {expected}, but got {result}'.format(
-        expected=name,
-        result=data['name']
-    )
-
-@then('this dog\'s status is "{status}"')
-def get(context, status):
-    data = context.response.json()
-    import pdb; pdb.set_trace
-    assert data['status'] == status, 'Expected dog to be {expected}, but it is {result}'.format(
-        expected=status,
-        result=data['status']
-    )
-

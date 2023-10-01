@@ -1,4 +1,4 @@
-Feature: An example of API Tests on the Swagger Pet Store API
+Feature: An example of API Tests /pet/findPetsByStatus
 
   @requests @medium
   Scenario Outline: <method> <uri><parameters> returns expected pet
@@ -25,21 +25,7 @@ Feature: An example of API Tests on the Swagger Pet Store API
       And should not reveal dog pii
 
 
-  @requests @medium
-  Scenario Outline: <method> <uri><parameters> returns expected pet & status
-    Given I "<method>" "<uri>" with the parameters "<parameters>"
-    Then it should have a "200" status code
-      And the json response should be a dict of least "1" items
-      And this dog is named "<pet_name>"
-      And this dog's status is "<status>"
-
-    Examples: Filtering by parameters works
-    | method  | uri    | parameters | pet_name | status    |
-    | GET     | /pet/  | 5          | Dog 2    | sold      |
-    | GET     | /pet/  | 2          | Cat 2    | available |
-    | GET     | /pet/  | 6          | Dog 3    | pending   |
-
-  @requests @medium @KEY-1 @should-fail
+  @requests @critical @KEY-1 @should-fail
   Scenario: Should upgrade insecure requests
     Given I "GET" "/pet/findByStatus?status=available" with requests
     Then it should have a "200" status code
