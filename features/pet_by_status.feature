@@ -25,6 +25,12 @@ Feature: An example of API Tests /pet/findPetsByStatus
       And should not reveal dog pii
 
 
+  @requests @medium
+  Scenario: The API should deliver Pets by status in under 2 seconds
+    When I "GET" "/pet/findByStatus?status=available" with requests
+    Then the response should be returned in under "2" seconds
+
+
   @requests @critical @KEY-1 @should-fail
   Scenario: Should upgrade insecure requests
     Given I "GET" "/pet/findByStatus?status=available" with requests

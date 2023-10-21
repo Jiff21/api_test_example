@@ -22,6 +22,12 @@ Feature: An example of API Tests /pet/{pet_id}
       And the response message should include "HTTP 405 Method Not Allowed"
 
 
+  @requests @medium
+  Scenario: The API should return GET Pets by ID in under 2 seconds
+    When I "GET" "/pet/5" with requests
+    Then the response should be returned in under "2" seconds
+
+
   @requests @Blocker
   Scenario: GET Pet by ID rejects SQL Injection
     Given I "GET" "/pet/1'+OR+1=1--" with requests

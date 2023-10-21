@@ -7,7 +7,6 @@ from custom_exceptions import loop_thru_messages
 from settings import API_URL, log
 
 
-
 @step('I "{method}" "{uri}" with requests')
 def get(context, method, uri):
     context.current_url = API_URL + uri
@@ -72,3 +71,9 @@ def step_impl(context, key, value):
         expected = value,
         result = data[key]
     )
+
+@then('the response should be returned in under "{expected_seconds:d}" seconds')
+def step_impl(context, expected_seconds):
+    assert context.response.elapsed.total_seconds() <= float(expected_seconds), \
+        'The response took {} seconds'.format(context.response.elapsed)
+
